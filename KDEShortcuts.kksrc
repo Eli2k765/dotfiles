@@ -438,7 +438,7 @@ screenlocker=
 [thunderbird.desktop][Global Shortcuts]
 ComposeMessage=
 OpenAddressBook=
-_launch=
+_launch=Alt+E
 
 [virtualbox.desktop][Global Shortcuts]
 Manager=
