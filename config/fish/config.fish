@@ -40,8 +40,10 @@ if status --is-interactive
    source ("/usr/bin/starship" init fish --print-full-init | psub)
 end
 
+
 ## Advanced command-not-found hook
 source /usr/share/doc/find-the-command/ftc.fish
+
 
 ## Functions
 # Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
@@ -95,10 +97,6 @@ end
 
 ## Useful aliases
 # Replace ls with exa
-alias rst='echo -e "\x1b\x63"'
-alias shred='shred -zf'
-alias l='/usr/bin/ls -ahls --color=auto'
-alias sl='ls'
 alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
 alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
 alias ll='exa -l --color=always --group-directories-first --icons'  # long format
@@ -107,21 +105,19 @@ alias l.="exa -a | egrep '^\.'"                                     # show only 
 alias ip="ip -color"
 
 # Replace some more things with better alternatives
-alias realcat='/usr/bin/cat'
-alias cat='bat --style header --style rules --style snip --style changes --style header'
+alias cat='bat --style header --style snip --style changes --style header'
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 # Common use
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
-alias tarnow='sudo tar -acf '
-alias untar='sudo tar -xvf '
-alias wget='wget -c --user-agent "noleak" '
-alias curl='curl --user-agent "noleak"'
+alias tarnow='tar -acf '
+alias untar='tar -xvf '
+alias wget='wget -c '
 alias rmpkg="sudo pacman -Rdd"
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-alias upd='sudo /usr/bin/update'
+alias upd='/usr/bin/garuda-update'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -132,27 +128,26 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias pacman="sudo pacman "
-alias docker='sudo docker '
-alias docker-compose='sudo docker-compose '
-alias cp="cp -i"                          # confirm before overwriting something
-alias rm="rm -i"
-alias wireshark="sudo wireshark"
-alias mv="mv -i"
-alias df="df -h"                          # human-readable sizes
-alias free="free -h"
-alias du="sudo du -h"
-alias hw='hwinfo --short'                                   # Hardware Info
-alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB
-alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'          # List amount of -git packages
+alias hw='hwinfo --short'                          # Hardware Info
+alias big="expac -H M '%m\t%n' | sort -h | nl"     # Sort installed packages according to size in MB
+alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
+alias websrv='sudo python -m http.server 80 '
+alias smbsrv='sudo smbserver.py share . -smb2support '
+alias ftpsrv='sudo python -m pyftpdlib -p 21 --write 0'
+alias vim='nvm use 16 && nvim '
 alias r2='r2 -d -A '
 alias xclip='xclip -selection clipboard'
 alias badchar='badchar | xclip '
 alias debruijin='/opt/metasploit/tools/exploit/pattern_create.rb -l '
-alias websrv='sudo python -m http.server '
-alias smbsrv='sudo smbserver.py share . -smb2support '
-alias ftpserv='sudo python -m pyftpdlib -p 21 --write '
 alias rlnc='sudo rlwrap -cAr nc -lvnp '
+
+
+# Fix fat and lazy fingers
+alias l='ls -la'
+alias sl='ls -la'
+
+# Sudo
+alias pacman="sudo pacman"
 
 # Get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -170,7 +165,7 @@ alias jctl="journalctl -p 3 -xb"
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 
-## Run neofetch if session is interactive
-#if status --is-interactive && type -q neofetch
-#   neofetch
+## Run fastfetch if session is interactive
+#if status --is-interactive && type -q fastfetch
+#   fastfetch --load-config neofetch
 #end
